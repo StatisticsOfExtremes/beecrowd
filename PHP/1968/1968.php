@@ -1,4 +1,4 @@
-<!-- All the citizens have been numbered from A to B (it is obvious that this idea has come from the adults — they love these things!). In order to define who would be the leaders of the groups during the evacuation, someone has suggested that the leaders should be all those who have received a prime number (it is obvious that this idea has come from a child — children have a lot of imagination and they love pleasing themselves with things that need no further explanation!). But soon another idea came forth:
+/* All the citizens have been numbered from A to B (it is obvious that this idea has come from the adults — they love these things!). In order to define who would be the leaders of the groups during the evacuation, someone has suggested that the leaders should be all those who have received a prime number (it is obvious that this idea has come from a child — children have a lot of imagination and they love pleasing themselves with things that need no further explanation!). But soon another idea came forth:
 
 — A prime number is a number that has exactly 2 divisors. What if the leaders were those who have received a number with exactly N divisors?
 
@@ -18,9 +18,41 @@ Output
 
 Output a line containing a single value which represents the number of possibilities for the formation of the groups. As this number can be very large, print only the remainder it leaves when divided by 109 + 7.
 
--->
+*/
 
-$N = 3;
+#$input = explode(trim(fgets(STDIN)), " ");
+
+$a = 5;
+$b = 8;
+$N = 4;
+
+# every number is divisible by 1 and itself, so we want
+# to know if its divisible by a number between [2, k - 1]
+# that is greater than the `number_of_divisors`
+
+function divisors($a) {
+    $n_divisors = 0;
+
+    foreach(range(2, $a - 1) as $dividend) {
+        if ($a % $dividend == 0) {
+            $n_divisors++;
+        };
+    };
+
+    return $n_divisors;
+};
+
+$leaders = 0;
+
+foreach(range(a, b) as $num => $key) {
+    if (divisors($num) == $N) {
+        $leaders++;
+    };
+};
+$thing = pow(10, 9) + 7;
+$ans = pow($leaders, ($b - $a + 1) - $leaders);
+
+echo ($ans % $thing);$N = 3;
 $a = 5;
 $b = 8;
 
@@ -41,6 +73,8 @@ function divisors($a) {
 }
 
 $leaders = 0;
+
+$thing
 
 foreach(range(a, b) as $num => $key) {
     if (divisors($num) == $N) {
