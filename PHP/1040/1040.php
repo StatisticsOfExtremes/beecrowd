@@ -2,17 +2,21 @@
 
 $weights = [2, 3, 4, 1];
 
+$format_mean = 'Media: %.1f';
+
+$format_mean_test = "\nAluno %s.\nMedia final: %.1f\n";
 $input = explode(" ", trim(fgets(STDIN)));
+
 
 $wsum = 0;
 	
 foreach($input as $key=>$value) {
-	$wsum = $value * $weights[$key];	
+	$wsum += $value * $weights[$key];	
 }
 
 $wmean = $wsum / array_sum($weights);
 
-echo "Media: $wmean\n";
+echo sprintf($format_mean, $wmean) . "\n";
 
 if ($wmean < 5.0) {
 	echo "Aluno reprovado.\n";
@@ -21,7 +25,7 @@ if ($wmean < 5.0) {
 
 
 if ($wmean >= 7.0) {
-	echo "Aluno aprovado\n";
+	echo "Aluno aprovado.\n";
 	return;
 }
 
@@ -32,6 +36,6 @@ $exame_input = trim(fgets(STDIN));
 echo "Nota do exame: $exame_input";
 
 echo (($exame_input + $wmean) / 2) >= 5 ?
-	 "Aluno aprovado.\nMedia final: {($exame_input + $wmean) / 2}\n":
-	 "Aluno reprovado.\nMedia final: {($exame_input + $wmean) / 2}\n";
+	sprintf($format_mean_test, "aprovado", ($exame_input + $wmean) / 2) :
+	sprintf($format_mean_test, "reprovado", ($exame_input + $wmean) / 2);
 
